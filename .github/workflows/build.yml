@@ -12,7 +12,9 @@ on:
     # set this to your preferred AWS region, e.g. us-west-1
 env:      
   ECR_REPOSITORY: peach          # set this to your Amazon ECR repository name
-  CONTAINER_NAME: MY_PEACH_APP
+  CONTAINER_IMAGE: MY_PEACH_APP
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+  AWS_DEFAULT_REGION: us-east-2
 
 jobs:
   build-and-push:
@@ -35,7 +37,10 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
-              docker build  -t $ECR_REGISTRY ./app
+              docker build \
+                -t $CONTAINER_IMAGE \
+                -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE ./app
+              #        docker build  -t $ECR_REGISTRY ./app
               # - name: Tag image
               #run: |
               #docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY:$ECR_REPOSITORY
@@ -43,5 +48,6 @@ jobs:
     - name: Push
       if: github.ref == 'refs/heads/master'
       run: |
-        docker push $ECR_REGISTRY
+        docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE
+              # docker push $ECR_REGISTRY
         #docker push 958056551390.dkr.ecr.us-east-2.amazonaws.com/peach_ecr:latest
