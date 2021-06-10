@@ -38,7 +38,7 @@ jobs:
         docker build -t $ECR_REPOSITORY ./app
     - name: Tag image
       run: |
-        docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        docker tag $ECR_REPOSITORY $ECR_REGISTRY/$ECR_REPOSITORY:latest
         #    docker tag peach_ecr:latest 958056551390.dkr.ecr.us-east-2.amazonaws.com/peach_ecr:latest
     - name: Push
       if: github.ref == 'refs/heads/master'
