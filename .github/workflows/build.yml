@@ -9,8 +9,8 @@ on:
     - master         
 name: Build and Push to ECR
 uses: aws-actions/configure-aws-credentials@v1
-with:
-aws-region: us-east-2
+env:
+AWS_REGION: us-east-2
 AWS_DEFAULT_OUTPUT: json
 AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
 AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -25,16 +25,14 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@master
-    - name: Set up Python
-      uses: actions/setup-python@v1
-      with:
-      python-version: "3.7"
-    - name: Install Dependencies
-      run: python3.7 -m pip install fastapi
 
-    - name: Setup ECR
-      run: |
-        $( aws ecr get-login --no-include-email )
+    - name: Login to ECR
+      id: ecr
+      uses: jwalton/gh-ecr-login@v1
+      with:
+        access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        region: us-east-2
     - name: Build and tag the image
       run: |
         docker build \
