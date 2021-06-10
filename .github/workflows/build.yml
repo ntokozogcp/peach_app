@@ -12,7 +12,7 @@ on:
     # set this to your preferred AWS region, e.g. us-west-1
 env:      
   ECR_REPOSITORY: peach          # set this to your Amazon ECR repository name
-  CONTAINER_IMAGE: MY_PEACH_APP
+  CONTAINER_IMAGE: my_peach_app
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
   AWS_DEFAULT_REGION: us-east-2
 
