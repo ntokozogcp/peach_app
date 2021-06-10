@@ -1,0 +1,47 @@
+on:
+  pull_request:
+    paths:
+    - app/**
+  push:
+    paths:
+    - app/**
+    branches:        
+    - master         
+name: Build and Push to ECR
+envvars.html
+env:
+AWS_DEFAULT_REGION: us-east-1
+AWS_DEFAULT_OUTPUT: json
+AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+CONTAINER_IMAGE: fastapi-example:${{ github.sha }}
+
+jobs:
+  build-and-push:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Set up Python
+      uses: actions/setup-python@v1
+      with:
+      python-version: "3.7"
+    - name: Install Dependencies
+      run: python3.7 -m pip install fastapi
+
+    - name: Setup ECR
+      run: |
+        $( aws ecr get-login --no-include-email )
+    - name: Build and tag the image
+      run: |
+        docker build \
+          -t $CONTAINER_IMAGE \
+          -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE ./app
+
+    - name: Push
+      if: github.ref == 'refs/heads/master'
+      run: |
+        docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE
