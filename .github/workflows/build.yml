@@ -11,7 +11,7 @@ on:
     
     # set this to your preferred AWS region, e.g. us-west-1
 env:      
-  ECR_REPOSITORY: peach_ecr          # set this to your Amazon ECR repository name
+  ECR_REPOSITORY: peach          # set this to your Amazon ECR repository name
   CONTAINER_NAME: MY_PEACH_APP
 
 jobs:
@@ -39,7 +39,7 @@ jobs:
     - name: Tag image
       run: |
         docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
-              #    docker tag peach_ecr:latest 958056551390.dkr.ecr.us-east-2.amazonaws.com/peach_ecr:latest
+        #    docker tag peach_ecr:latest 958056551390.dkr.ecr.us-east-2.amazonaws.com/peach_ecr:latest
     - name: Push
       if: github.ref == 'refs/heads/master'
       run: |
