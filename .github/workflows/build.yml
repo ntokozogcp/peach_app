@@ -2,9 +2,11 @@ on:
   pull_request:
     paths:
     - app/**
+    - manifests/**
   push:
     paths:
     - app/**
+    - manifests/**
     branches:        
     - master         
     
@@ -73,7 +75,7 @@ deploy:
      cd $K8S_YAML_DIR
      curl -s -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
      chmod u+x ./kustomize
-     kubectl apply -k $K8S_YAML_DIR
+     kubectl apply -k $K8S_YAML_DIR/
 
 
 
