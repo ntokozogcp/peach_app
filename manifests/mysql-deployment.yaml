@@ -17,7 +17,7 @@ kind: Deployment
 metadata:
   name: peach-mysql
   labels:
-  app: peach
+    app: peach
 spec:
   selector:
     matchLabels:
