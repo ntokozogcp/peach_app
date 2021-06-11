@@ -68,7 +68,6 @@ jobs:
       #      aws-region: us-east-2  
    
     - name: Deploy k8s yaml
-      uses: actions/checkout@v2
       env:
         K8S_YAML_DIR: ./manifests 
       run: |  
