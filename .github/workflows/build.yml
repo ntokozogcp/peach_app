@@ -66,8 +66,8 @@ deploy:
       #      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
       #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       #      aws-region: us-east-2  
-
-   - name: Deploy k8s yaml
+   
+  - name: Deploy k8s yaml
      id: deploy-k8s-yaml
      env:
        K8S_YAML_DIR: ./manifests 
