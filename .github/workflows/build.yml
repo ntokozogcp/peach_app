@@ -87,12 +87,14 @@ jobs:
         aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
 
     - name: deploy to cluster
-      uses: steebchen/kubectl@master
+      #uses: steebchen/kubectl@master
       env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+              # KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         K8S_YAML_DIR: ./manifests
-      with:
-         args: "apply -k $K8S_YAML_DIR/"
+      run: |
+        kubectl apply -k $K8S_YAML_DIR/
+        # with:
+        #args: "apply -k $K8S_YAML_DIR/"
         #run: |
         #aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
 
