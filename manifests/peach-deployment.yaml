@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: svc-peach
+  labels:
+    app: peach
 spec:
   ports:
   - protocol: "TCP"        
@@ -17,7 +19,7 @@ kind: Deployment
 metadata:
   name: peach
   labels:
-  app: peach
+    app: peach
 spec:
   selector:
     matchLabels:
