@@ -16,7 +16,7 @@ env:
   access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
   secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_DEFAULT_REGION: us-east-2
-  EKS_CLUSTER_NAME: eks-peach
+  EKS_CLUSTER_NAME: peach-eks
 
 jobs:
   build-and-push:
