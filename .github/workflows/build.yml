@@ -57,7 +57,7 @@ jobs:
         # - name: Setup kubeconfig
         #id: setup-kubeconfig
         #run: |
-        #
+    
     - name: Deploy k8s yaml
       env:
         K8S_YAML_DIR: ./manifests
@@ -67,7 +67,7 @@ jobs:
         chmod u+x ./kustomize
 
     - name: deploy to cluster
-      uses: rsooo/kubectl@v1.0.1
+      uses: rsooo/kubectl@v2.278.0
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         K8S_YAML_DIR: ./manifests
