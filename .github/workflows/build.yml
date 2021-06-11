@@ -68,7 +68,7 @@ deploy:
       #      aws-region: us-east-2  
    
   - name: Deploy k8s yaml
-     id: deploy-k8s-yaml
+    #    id: deploy-k8s-yaml
      env:
        K8S_YAML_DIR: ./manifests 
        run: |  
