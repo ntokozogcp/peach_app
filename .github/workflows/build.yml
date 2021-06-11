@@ -56,7 +56,16 @@ jobs:
         #  steps:
         # - name: Setup kubeconfig
         #id: setup-kubeconfig
-        #run: |
+    
+       #run: |
+
+    - uses: chrislennon/action-aws-cli@v1.1
+      run: |
+        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
     
     - name: Deploy k8s yaml
       env:
@@ -66,12 +75,15 @@ jobs:
         curl -s -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
 
+
     - name: AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          aws-region: us-east-2
+
+
 
     - name: deploy to cluster
       uses: steebchen/kubectl@master
