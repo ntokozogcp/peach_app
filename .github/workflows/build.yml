@@ -58,7 +58,7 @@ jobs:
         #id: setup-kubeconfig
         #run: |
     - name: deploy to cluster
-      uses: rsooo/kubectl@v1.0.1
+      #:uses: rsooo/kubectl@v1.0.1
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       run: |
