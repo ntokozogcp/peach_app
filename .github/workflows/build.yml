@@ -54,8 +54,13 @@ jobs:
 
 
         #  steps:
-    - name: Setup kubeconfig
-      id: setup-kubeconfig
+        # - name: Setup kubeconfig
+        #id: setup-kubeconfig
+        #run: |
+    - name: deploy to cluster
+      uses: rsooo/kubectl@v1.0.1
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       run: |
         aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
 
