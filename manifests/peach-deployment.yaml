@@ -31,8 +31,8 @@ spec:
   template:
     metadata:
       labels:
-      app: peach
-      tier: frontend
+       app: peach
+       tier: frontend
     spec:
       containers:
       - image: 958056551390.dkr.ecr.us-east-2.amazonaws.com/peach
