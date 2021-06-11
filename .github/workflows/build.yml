@@ -57,7 +57,7 @@ jobs:
     - name: Setup kubeconfig
       id: setup-kubeconfig
       run: |
-        aws eks --region $AWS_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
+        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
 
       #  - uses: actions/checkout@v2
       #  - name: AWS Credentials
