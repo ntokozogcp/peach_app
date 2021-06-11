@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-peach
+  labels:
+  app: peach
+spec:
+  ports:
+  - protocol: "TCP"        
+    port: 80
+    targetPort: 5000
+  selector:
+    app: peach
+    tier: frontend
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: peach
+  labels:
+  app: peach
+spec:
+  selector:
+    matchLabels:
+      app: peach
+      tier: frontend
+  replicas: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+      app: peach
+      tier: frontend
+    spec:
+      containers:
+      - image: 958056551390.dkr.ecr.us-east-2.amazonaws.com/peach
+        name: peach
+        env:
+        - name: PEACH_DB_HOST
+          value: PEACH-mysql
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        ports:
+        - containerPort: 5000
+          name: peach
+        volumeMounts:
+        - name: peach-persistent-storage
+          mountPath: /var/www/html
+        - name: create-peachdb
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: peach-persistent-storage
+        persistentVolumeClaim:
+          claimName: efs-peach
+      - name: create-peachdb
+        configMap:
+          name: create-peachdb

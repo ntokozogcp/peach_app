@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
+import kubernetes import client, config
 
 
 
@@ -12,10 +13,11 @@ app = Flask(__name__)
 
 app.secret_key = 'pass@123'
 
-app.config['MYSQL_HOST'] = 'localhost'
+app.config['PEACH_DB_HOST'] = 'PEACH-mysql'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Redhat@$1'
-app.config['MYSQL_DB'] = 'geeklogin'
+#app.config['peach_DB_PASSWORD'] = 'Redhat@$1'
+app.config['MYSQL_ROOT_PASSWORD'] = v1.read_namespaced_secret("mysql-pass", "default")
+app.config['MYSQL_DB'] = 'peachdb'
 
 mysql = MySQL(app)
 
