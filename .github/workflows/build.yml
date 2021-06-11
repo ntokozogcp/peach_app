@@ -59,7 +59,13 @@ jobs:
     
        #run: |
 
-    
+    - id: install-aws-cli
+      uses: unfor19/install-aws-cli-action@v1
+      with:
+        version: 1
+
+
+        
     - name: Deploy k8s yaml
       env:
         K8S_YAML_DIR: ./manifests
@@ -76,7 +82,9 @@ jobs:
          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          aws-region: us-east-2
 
-
+    - name: UIse cluster
+      run: |
+        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
 
     - name: deploy to cluster
       uses: steebchen/kubectl@master
@@ -90,7 +98,7 @@ jobs:
         #run: |
         #aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
 
-        # uses: actions/checkout@v2
+      # uses: actions/checkout@v2
         #  - name: AWS Credentials
         #uses: aws-actions/configure-aws-credentials@v1
         #with:
