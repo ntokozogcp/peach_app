@@ -54,10 +54,10 @@ jobs:
 
 
         #  steps:
-  - name: Setup kubeconfig
-    #id: setup-kubeconfig
-    run: |
-      aws eks --region $AWS_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
+    - name: Setup kubeconfig
+      id: setup-kubeconfig
+      run: |
+        aws eks --region $AWS_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
 
       #  - uses: actions/checkout@v2
       #  - name: AWS Credentials
@@ -67,15 +67,15 @@ jobs:
       #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       #      aws-region: us-east-2  
    
-  - name: Deploy k8s yaml
-    uses: actions/checkout@v2
-    env:
-      K8S_YAML_DIR: ./manifests 
-    run: |  
-      cd $K8S_YAML_DIR
-      curl -s -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
-      chmod u+x ./kustomize
-      kubectl apply -k $K8S_YAML_DIR/
+    - name: Deploy k8s yaml
+      uses: actions/checkout@v2
+      env:
+        K8S_YAML_DIR: ./manifests 
+      run: |  
+        cd $K8S_YAML_DIR
+        curl -s -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+        chmod u+x ./kustomize
+        kubectl apply -k $K8S_YAML_DIR/
 
 
 
