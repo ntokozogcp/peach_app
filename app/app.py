@@ -6,6 +6,8 @@ import mysql.connector
 import re
 from kubernetes import client, config
 
+config.load_kube_config()
+v1 = client.CoreV1Api()
 
 
 app = Flask(__name__)
