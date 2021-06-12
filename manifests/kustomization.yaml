@@ -3,7 +3,7 @@ kind: Kustomization
 secretGenerator:
 - name: mysql-pass
   literals:
-  - password=*******
+  - password=bXlzcWwtcGFzcw==
 resources:
 - efs-provisioner.yaml
 - rbac.yaml
