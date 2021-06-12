@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+ARG PYTHON_VER="3.6.8"
+
 RUN apt-get update -y && apt-get install -y python3-pip python-dev
 
 COPY ./requirements.txt /app/requirements.txt
