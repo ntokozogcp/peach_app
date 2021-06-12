@@ -1,7 +1,7 @@
 FROM python:3.6.8
 
 
-i#RUN apt-get update -y && apt-get install -y python3-pip python-dev
+#RUN apt-get update -y && apt-get install -y python3-pip python-dev
 
 COPY ./requirements.txt /app/requirements.txt
 # set the working directory in the container
