@@ -5,6 +5,8 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
 import re
 from kubernetes import client, config
+from kubernetes.client import Configuration
+from kubernetes.config import kube_config
 
 config.load_incluster_config()
 v1 = client.CoreV1Api()
