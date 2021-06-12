@@ -34,7 +34,7 @@ spec:
        app: peach
        tier: frontend
     spec:
-      serviceAccountName: myaccount
+      serviceAccountName: default
       containers:
       - image: 958056551390.dkr.ecr.us-east-2.amazonaws.com/peach
         name: peach
