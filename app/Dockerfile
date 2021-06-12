@@ -1,8 +1,7 @@
-FROM ubuntu:latest
+FROM python:3.6.8
 
-ARG PYTHON_VER="3.6.8"
 
-RUN apt-get update -y && apt-get install -y python3-pip python-dev
+i#RUN apt-get update -y && apt-get install -y python3-pip python-dev
 
 COPY ./requirements.txt /app/requirements.txt
 # set the working directory in the container
