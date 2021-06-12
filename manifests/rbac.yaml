@@ -4,7 +4,7 @@ metadata:
   name: nfs-provisioner-role-binding
 subjects:
 - kind: ServiceAccount
-  name: default
+  name: myaccount
   namespace: default
 roleRef:
   kind: ClusterRole
