@@ -51,12 +51,7 @@ spec:
         volumeMounts:
         - name: peach-persistent-storage
           mountPath: /var/www/html
-        - name: create-peachdb
-          mountPath: /docker-entrypoint-initdb.d
       volumes:
       - name: peach-persistent-storage
         persistentVolumeClaim:
           claimName: efs-peach
-      - name: create-peachdb
-        configMap:
-          name: create-peachdb

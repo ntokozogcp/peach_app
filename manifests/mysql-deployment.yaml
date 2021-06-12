@@ -46,7 +46,12 @@ spec:
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
+         - name: create-peachdb
+           mountPath: /docker-entrypoint-initdb.d
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
            claimName: efs-mysql
+      - name: create-peachdb
+        configMap:
+          name: create-peachdb
