@@ -38,6 +38,7 @@ spec:
       containers:
       - image: 958056551390.dkr.ecr.us-east-2.amazonaws.com/peach
         name: peach
+        command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
         env:
         - name: MYSQL_HOST
           value: PEACH-mysql
