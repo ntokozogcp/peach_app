@@ -4,11 +4,11 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
-import base64
-from kubernetes import client, config
-config.load_incluster_config()
-from kubernetes.config import kube_config
-v1 = client.CoreV1Api()
+#import base64
+#from kubernetes import client, config
+#config.load_incluster_config()
+#from kubernetes.config import kube_config
+#v1 = client.CoreV1Api()
 
 
 #secret = v1.read_namespaced_secret("mysql-pass", "default") # 
