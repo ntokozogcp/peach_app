@@ -1,11 +1,11 @@
 #App deps
 Flask==1.0.3
-requests==2.22.0
+#requests==2.22.0
 
 #DB Connectors
 #flask-mysql==1.4.0
-mysql-connector
-Flask-MySQL==1.5.1
+#mysql-connector
+#Flask-MySQL==1.5.1
 flask-mysqldb
 kubernetes
-cryptography==3.2
+#cryptography==3.2

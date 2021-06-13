@@ -3,7 +3,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
-import mysql.connector
 import re
 import base64
 from kubernetes import client, config
@@ -12,11 +11,11 @@ from kubernetes.config import kube_config
 v1 = client.CoreV1Api()
 
 
-#secret = v1.read_namespaced_secret("mysql-pass", "default") # 
-#data = secret.data
-#name = secret.metadata.name
-#password = secret.data['password']
-#decoded = base64.b64decode(password)
+secret = v1.read_namespaced_secret("mysql-pass", "default") # 
+data = secret.data
+name = secret.metadata.name
+password = secret.data['password']
+decoded = base64.b64decode(password)
 
 
 app = Flask(__name__)
@@ -24,12 +23,12 @@ app = Flask(__name__)
 
 app.secret_key = 'pass@123'
 
-app.config["MYSQL_HOST"] = "PEACH-mysql"
-app.config["MYSQL_USER"] = "root"
-app.config["MYSQL_PASSWORD"]=""
+app.config['MYSQL_HOST'] = 'PEACH-mysql'
+app.config["MYSQL_USER"] = 'root'
+#app.config["MYSQL_PASSWORD"]=""
 #app.config['peach_DB_PASSWORD'] = 'Redhat@$1'
-#app.config['MYSQL_PASSWORD'] = decoded
-app.config["MYSQL_DB"] = "peachdb"
+app.config['MYSQL_PASSWORD'] = 'decoded'
+app.config['MYSQL_DB'] = 'peachdb'
 
 mysql = MySQL(app)
 
