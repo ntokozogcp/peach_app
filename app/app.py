@@ -86,5 +86,5 @@ def register():
 		msg = 'Please fill out the form !'
 	return render_template('register.html', msg = msg)
 
-if __name__ == '__main__':
-        app.run(debug=True)
+#if __name__ == '__main__':
+ #       app.run(debug=True)
