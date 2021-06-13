@@ -1,42 +1,13 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: myaccount
-  namespace: default
----          
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  namespace: default
-  name: pods-reader-role
-rules:
-- apiGroups: ["*"]
-  resources: ["*"]
-  verbs: ["*"]
----
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: pod-controller
-  namespace: default
-subjects:
-- kind: ServiceAccount
-  name: myaccount
-  apiGroup: ""
-roleRef:
-  kind: Role
-  name: pods-reader-role
-  apiGroup: ""
----
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
   name: nfs-provisioner-role-binding
 subjects:
 - kind: ServiceAccount
-  name: myaccount
+  name: default
   namespace: default
 roleRef:
   kind: ClusterRole
   name: cluster-admin
   apiGroup: rbac.authorization.k8s.io
+
