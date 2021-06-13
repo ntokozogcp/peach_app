@@ -23,10 +23,10 @@ app = Flask(__name__)
 
 app.secret_key = 'pass@123'
 
-app.config['PEACH_DB_HOST'] = 'PEACH-mysql'
+app.config['MYSQL_HOST'] = 'PEACH-mysql'
 app.config['MYSQL_USER'] = 'root'
 #app.config['peach_DB_PASSWORD'] = 'Redhat@$1'
-#app.config['MYSQL_ROOT_PASSWORD'] = decoded
+#app.config['MYSQL_PASSWORD'] = decoded
 app.config['MYSQL_DB'] = 'peachdb'
 
 mysql = MySQL(app)

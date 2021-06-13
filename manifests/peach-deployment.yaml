@@ -39,9 +39,9 @@ spec:
       - image: 958056551390.dkr.ecr.us-east-2.amazonaws.com/peach
         name: peach
         env:
-        - name: PEACH_DB_HOST
+        - name: MYSQL_HOST
           value: PEACH-mysql
-        - name: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mysql-pass
